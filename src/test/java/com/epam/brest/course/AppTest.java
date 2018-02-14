@@ -1,38 +1,42 @@
 package com.epam.brest.course;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.Test;
+import org.junit.experimental.theories.DataPoint;
+import org.junit.experimental.theories.DataPoints;
+import org.junit.experimental.theories.Theories;
+import org.junit.experimental.theories.Theory;
+import org.junit.runner.RunWith;
+
+import static org.junit.Assert.*;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 /**
  * Unit test for simple App.
  */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
+@RunWith(Theories.class)
+public class AppTest {
+    @Test
+    public void main() {
+        final ByteArrayOutputStream byteArrayOutputStream =
+                new ByteArrayOutputStream();
+        PrintStream printStream = System.out;
+
+        System.setOut(new PrintStream(byteArrayOutputStream));
+
+        App.main(null);
+
+        System.setOut(printStream);
+
+        assertEquals("Hello World!\n", byteArrayOutputStream.toString());
     }
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
+
+    @Theory
+    public void sum(long[] candidate) {
+        assertEquals(candidate[2], App.sum(candidate[0], candidate[1]));
     }
 
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
-    }
+    public static @DataPoints long[][] candidates = {{1, 2, 3}, {4, 5, 9}, {10, -15, -5}};
 }
