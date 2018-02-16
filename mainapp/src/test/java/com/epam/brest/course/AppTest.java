@@ -17,7 +17,7 @@ import java.io.PrintStream;
  */
 @RunWith(Theories.class)
 public class AppTest {
-    @Test
+    /*@Test
     public void main() {
         final ByteArrayOutputStream byteArrayOutputStream =
                 new ByteArrayOutputStream();
@@ -30,7 +30,7 @@ public class AppTest {
         System.setOut(printStream);
 
         assertEquals("Hello World!\n", byteArrayOutputStream.toString());
-    }
+    }*/
 
 
     @Theory
