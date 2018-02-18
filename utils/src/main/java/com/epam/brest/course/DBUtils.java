@@ -9,7 +9,7 @@ public class DBUtils {
         System.out.println("Connect to DB.");
 
         Class.forName("org.h2.Driver");
-        //test_db is name of database
+
         String databaseURL = "jdbc:h2:mem:test_db;MODE=MYSQL;DB_CLOSE_DELAY=-1";
 
         Connection connection = DriverManager.getConnection(databaseURL, "sa", "");
@@ -28,20 +28,21 @@ public class DBUtils {
                         "description VARCHAR(255) NULL," +
                         "PRIMARY KEY (user_id))";
 
-        try (Statement statement = connection.createStatement();) {
+        try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(createTable);
         }
     }
 
     public void addUser(Connection connection, String login, String password, String description) throws SQLException {
-        System.out.println(String.format("Add user: %s ", login));
+        System.out.println(String.format("Add user: %s.", login));
 
         String newUser = "INSERT INTO app_user (login, password, description) VALUES (?,?,?)";
-        PreparedStatement preparedStatement = connection.prepareStatement(newUser);
-        preparedStatement.setString(1, login);
-        preparedStatement.setString(2, password);
-        preparedStatement.setString(3, description);
-        preparedStatement.executeUpdate();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(newUser)) {
+            preparedStatement.setString(1, login);
+            preparedStatement.setString(2, password);
+            preparedStatement.setString(3, description);
+            preparedStatement.executeUpdate();
+        }
 
     }
 
@@ -50,14 +51,26 @@ public class DBUtils {
 
         String getRecords = "SELECT user_id, login, description FROM app_user ORDER BY user_id";
 
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(getRecords);
+        try (Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery(getRecords);
 
-        while (resultSet.next()) {
-            System.out.printf(String.format("User: %s, %s, %s \n",
-                    resultSet.getInt("user_id"),
-                    resultSet.getString("login"),
-                    resultSet.getString("description")));
+            while (resultSet.next()) {
+                System.out.printf(String.format("User: %s, %s, %s \n",
+                        resultSet.getInt("user_id"),
+                        resultSet.getString("login"),
+                        resultSet.getString("description")));
+            }
+        }
+    }
+
+    public void deleteUser(Connection connection, String login) throws SQLException {
+        System.out.println(String.format("Delete user: %s.", login));
+
+        String delete_user = "DELETE FROM app_user WHERE login = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(delete_user)) {
+            preparedStatement.setString(1, login);
+            preparedStatement.executeUpdate();
         }
     }
 }

@@ -15,6 +15,8 @@ public class App {
         dbUtils.addUser(connection, "admin", "admin", "User admin");
         dbUtils.addUser(connection, "admin1", "admin1", "User admin1");
         dbUtils.addUser(connection, "admin2", "admin2", "User admin2");
+        dbUtils.addUser(connection, "a", "b", "c");
+        dbUtils.deleteUser(connection, "a");
         dbUtils.getUsers(connection);
     }
 
