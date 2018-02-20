@@ -10,9 +10,7 @@
     </parent>
 
     <artifactId>mainapp</artifactId>
-    <version>1.0-SNAPSHOT</version>
-
-    <name>mainpart</name>
+    <name>mainapp</name>
     <url>http://maven.apache.org</url>
 
     <properties>

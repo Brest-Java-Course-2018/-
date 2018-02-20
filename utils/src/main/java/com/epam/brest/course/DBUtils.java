@@ -1,7 +1,5 @@
 package com.epam.brest.course;
 
-import org.h2.jdbc.JdbcConnectionBackwardsCompat;
-
 import java.sql.*;
 
 public class DBUtils {

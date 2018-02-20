@@ -7,7 +7,8 @@ import java.sql.SQLException;
  * Hello world!
  */
 public class App {
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    public static void main(final String[] args)
+            throws SQLException, ClassNotFoundException {
 
         DBUtils dbUtils = new DBUtils();
         Connection connection = dbUtils.getConnection();
@@ -25,7 +26,7 @@ public class App {
      * @param b second addendum
      * @return a + b
      */
-    public static long sum(long a, long b) {
+    public static long sum(final long a, final long b) {
         return a + b;
     }
 }

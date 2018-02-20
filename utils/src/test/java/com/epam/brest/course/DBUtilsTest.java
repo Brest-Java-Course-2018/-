@@ -1,7 +1,6 @@
 package com.epam.brest.course;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,7 +16,8 @@ public class DBUtilsTest {
     private PrintStream printStream;
     private DBUtils dbUtils = new DBUtils();
 
-    @org.junit.Test
+    //@org.junit.Test
+    @Test
     public void getConnection() throws SQLException, ClassNotFoundException {
         DBUtils dbUtils = new DBUtils();
         dbUtils.getConnection();
@@ -25,7 +25,7 @@ public class DBUtilsTest {
     }
 
     @Before
-    public void setUp()  {
+    public void setUp() {
         printStream = System.out;
         System.setOut(new PrintStream(byteArrayOutputStream));
     }

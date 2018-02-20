@@ -45,5 +45,6 @@ public class AppTest {
         assertEquals(candidate[2], App.sum(candidate[0], candidate[1]));
     }
 
-    public static @DataPoints long[][] candidates = {{1, 2, 3}, {4, 5, 9}, {10, -15, -5}};
+    public static @DataPoints
+    long[][] candidates = {{1, 2, 3}, {4, 5, 9}, {10, -15, -5}};
 }
