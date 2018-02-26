@@ -13,8 +13,7 @@
     <url>http://maven.apache.org</url>
 
     <modules>
-        <module>utils</module>
-        <module>mainapp</module>
+        <module>model</module>
     </modules>
 
     <distributionManagement>
@@ -144,6 +143,7 @@
                             <encoding>UTF-8</encoding>
                             <consoleOutput>true</consoleOutput>
                             <failsOnError>false</failsOnError>
+                            //will be error if true
                             <failOnViolation>false</failOnViolation>
                             <linkXRef>false</linkXRef>
                         </configuration>
