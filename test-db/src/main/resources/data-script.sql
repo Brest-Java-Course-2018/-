@@ -1,4 +1,5 @@
 INSERT INTO department (departmentName, description)
-VALUES ('Distribution', 'Distribution Department')
-  , ('Support', 'Technical Support Team')
-  , ('Marketing', 'Marketing Department');
+VALUES ('Distribution', 'Distribution Department');
+
+INSERT INTO employee (employeeName, salary, deptId)
+VALUES ('Ivan Ivanov', 500, 1);

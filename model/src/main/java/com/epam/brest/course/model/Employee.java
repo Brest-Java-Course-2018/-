@@ -24,7 +24,28 @@ public class Employee {
     /**
      * Property Id of department.
      */
-    private Integer departmentId;
+    private Integer deptId;
+
+    /**
+     * Constructor without parameters for Employee.
+     */
+    public Employee() {
+    }
+
+    /**
+     * Constructor with parameters for Employee.
+     *
+     * @param employeeName name of Employee.
+     * @param salary salary for Employee.
+     * @param deptId index of department.
+     */
+    public Employee(final String employeeName,
+                    final Integer salary,
+                    final Integer deptId) {
+        this.employeeName = employeeName;
+        this.salary = salary;
+        this.deptId = deptId;
+    }
 
     /**
      * Get employee Id.
@@ -81,21 +102,21 @@ public class Employee {
     }
 
     /**
-     * Get employee departmentId.
+     * Get employee deptId.
      *
      * @return id of department.
      */
-    public Integer getDepartmentId() {
-        return departmentId;
+    public Integer getDeptId() {
+        return deptId;
     }
 
     /**
-     * Set employee departmentId.
+     * Set employee deptId.
      *
-     * @param departmentId new id of department.
+     * @param deptId new id of department.
      */
-    public void setDepartmentId(final Integer departmentId) {
-        this.departmentId = departmentId;
+    public void setDeptId(final Integer deptId) {
+        this.deptId = deptId;
     }
 
     @Override
@@ -104,7 +125,7 @@ public class Employee {
                 + "employeeId=" + employeeId
                 + ", employeeName='" + employeeName
                 + '\'' + ", salary=" + salary
-                + ", departmentId=" + departmentId
+                + ", deptId=" + deptId
                 + '}';
     }
 }

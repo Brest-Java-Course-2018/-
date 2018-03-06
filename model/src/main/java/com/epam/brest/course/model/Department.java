@@ -1,7 +1,5 @@
 package com.epam.brest.course.model;
 
-import java.util.Objects;
-
 /**
  * POJO department.
  */
@@ -22,10 +20,19 @@ public class Department {
      */
     private String description;
 
+    /**
+     * Constructor without parameters for Department.
+     */
     public Department() {
     }
 
-    public Department(String departmentName, String description) {
+    /**
+     * Constructor with parameters for Department.
+     *
+     * @param departmentName name of Department.
+     * @param description discription if Department.
+     */
+    public Department(final String departmentName, final String description) {
         this.departmentName = departmentName;
         this.description = description;
     }
@@ -91,25 +98,5 @@ public class Department {
                 + ", departmentName='" + departmentName
                 + '\'' + ", description='" + description
                 + '\'' + '}';
-    }
-
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Department that = (Department) o;
-        return Objects.equals(departmentId, that.departmentId)
-                && Objects.equals(departmentName, that.departmentName)
-                && Objects.equals(description, that.description);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(departmentId, departmentName, description);
     }
 }

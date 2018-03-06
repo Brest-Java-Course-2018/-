@@ -43,29 +43,19 @@ public class DepartmentDaoImplTest {
 
     @Test
     public void addDepartment() {
-        /*final String DEP_NAME = "Management";
-        final String DEP_DESCR = "Management Department";
-
-        Department dep = new Department();
-        dep.setDepartmentName(DEP_NAME);
-        dep.setDescription(DEP_DESCR);
-
-        Department department = departmentDao.addDepartment(dep);
-
-        Assert.assertNotNull(department);
-        Assert.assertTrue(department.getDepartmentName().equals(DEP_NAME));
-        Assert.assertTrue(department.getDescription().equals(DEP_DESCR));*/
-
         List<Department> departments = departmentDao.getDepartments();
         int sizeBefore = departments.size();
         Department department = new Department("Education and Training",
                 "Department Education and Training");
         Department newDepartment = departmentDao.addDepartment(department);
-        Assert.assertNotNull(newDepartment.getDepartmentId());
-        Assert.assertTrue(newDepartment.getDepartmentName().equals(department.getDepartmentName()));
-        Assert.assertTrue(newDepartment.getDescription().equals(department.getDescription()));
-        Assert.assertTrue(sizeBefore + 1 == departmentDao.getDepartments().size());
-        Assert.assertTrue(department.equals(newDepartment));
+
+        Assert.assertNotNull(newDepartment);
+        Assert.assertTrue(newDepartment.getDepartmentName().equals(
+                department.getDepartmentName()));
+        Assert.assertTrue(newDepartment.getDescription().equals(
+                department.getDescription()));
+        Assert.assertTrue(
+                sizeBefore + 1 == departmentDao.getDepartments().size());
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -92,44 +82,34 @@ public class DepartmentDaoImplTest {
 
     @Test
     public void updateDepartment() {
-        /*Department dep = new Department();
-        dep.setDepartmentId(2);
-        dep.setDepartmentName("Supp");
-        dep.setDescription("Support Team");
-
-        departmentDao.updateDepartment(dep);
-        Department department = departmentDao.getDepartmentById(2);
-
-        Assert.assertNotNull(department);
-        Assert.assertEquals(dep, department);*/
-
         Department department =
                 new Department("Education", "Department of Education");
         Department newDepartment = departmentDao.addDepartment(department);
         newDepartment.setDepartmentName("NEW Education");
         newDepartment.setDescription("NEW Department of Education");
-
         departmentDao.updateDepartment(newDepartment);
-        Department updateDepartment = departmentDao.getDepartmentById(newDepartment.getDepartmentId());
-        Assert.assertTrue(newDepartment.getDepartmentId().equals(updateDepartment.getDepartmentId()));
-        Assert.assertTrue(newDepartment.getDepartmentName().equals(updateDepartment.getDepartmentName()));
-        Assert.assertTrue(newDepartment.getDescription().equals(updateDepartment.getDescription()));
+        Department updateDepartment = departmentDao.getDepartmentById(
+                newDepartment.getDepartmentId());
+
+        Assert.assertTrue(newDepartment.getDepartmentId() ==
+                updateDepartment.getDepartmentId());
+        Assert.assertTrue(newDepartment.getDepartmentName().equals(
+                updateDepartment.getDepartmentName()));
+        Assert.assertTrue(newDepartment.getDescription().equals(
+                updateDepartment.getDescription()));
 
     }
 
 
     @Test
     public void deleteDepartmentById() {
-        /*departmentDao.deleteDepartmentById(3);
-        Department department = departmentDao.getDepartmentById(3);
-        Assert.assertTrue(department == null);*/
-
         Department department =
                 new Department("Education", "Department of Education");
         department = departmentDao.addDepartment(department);
         List<Department> departments = departmentDao.getDepartments();
         int sizeBefore = departments.size();
         departmentDao.deleteDepartmentById(department.getDepartmentId());
+
         Assert.assertTrue(sizeBefore - 1 == departmentDao.getDepartments().size());
     }
 }

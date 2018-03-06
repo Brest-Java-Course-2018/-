@@ -20,35 +20,62 @@ import java.util.List;
  */
 public class DepartmentDaoImpl implements DepartmentDao {
 
+    /**
+     * Constant variable.
+     */
     public static final String DEPARTMENT_ID = "departmentId";
+    /**
+     * Constant variable.
+     */
     public static final String DEPARTMENT_NAME = "departmentName";
+    /**
+     * Constant variable.
+     */
     public static final String DESCRIPTION = "description";
+
+    /**
+     * Query for select.
+     */
+    @Value("${department.select}")
+    private String departmentSelect;
+    /**
+     * Query for select by id.
+     */
+    @Value("${department.selectById}")
+    private String departmentSelectByID;
+    /**
+     * Query for count of number.
+     */
+    @Value("${department.checkDepartment}")
+    private String departmentCheckDepartment;
+    /**
+     * Query for inserting.
+     */
+    @Value("${department.insert}")
+    private String departmentInsert;
+    /**
+     * Query for updating.
+     */
+    @Value("${department.update}")
+    private String departmentUpdate;
+    /**
+     * Query for deleting.
+     */
+    @Value("${department.delete}")
+    private String departmentDelete;
 
     /**
      * Class NamedParameterJdbcTemplate from spring JDBC.
      */
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    @Value("${department.select}")
-    private String departmentSelect;
-    @Value("${department.selectById}")
-    private String departmentSelectByID;
-    @Value("${department.checkDepartment}")
-    private String departmentcheckDepartment;
-    @Value("${department.insert}")
-    private String departmentInsert;
-    @Value("${department.update}")
-    private String departmentUpdate;
-    @Value("${department.delete}")
-    private String departmentDelete;
-
     /**
-     * Set namedParameterJdbcTemplate
+     * Set namedParameterJdbcTemplate.
      *
-     * @param namedParameterJdbcTemplate new namedParameterJdbcTemplate
+     * @param namedParameterJdbcTemplate new namedParameterJdbcTemplate.
      */
     public void setNamedParameterJdbcTemplate(
-            NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+            final NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
@@ -61,27 +88,13 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     }
 
-    /*@Override
+    @Override
     public Department getDepartmentById(final Integer departmentId) {
         SqlParameterSource namedParametrs =
                 new MapSqlParameterSource(DEPARTMENT_ID, departmentId);
-        try {
-            Department department = namedParameterJdbcTemplate.queryForObject(
-                    departmentSelectByID,
-                    namedParametrs,
-                    new DepartmentRowMapper());
-            return department;
-        } catch (EmptyResultDataAccessException e) {
-            return null;
-        }
-    }*/
-
-    @Override
-    public Department getDepartmentById(Integer departmentId) {
-        SqlParameterSource namedParametrs =
-                new MapSqlParameterSource(DEPARTMENT_ID, departmentId);
         Department department = namedParameterJdbcTemplate.queryForObject(
-                departmentSelectByID, namedParametrs,
+                departmentSelectByID,
+                namedParametrs,
                 BeanPropertyRowMapper.newInstance(Department.class));
 
         return department;
@@ -89,19 +102,11 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     @Override
     public Department addDepartment(final Department department) {
-        /*KeyHolder keyHolder = new GeneratedKeyHolder();
-        namedParameterJdbcTemplate.update(
-                ADD_DEPARTMENT_SQL,
-                new BeanPropertySqlParameterSource(department),
-                keyHolder);
-        department.setDepartmentId(keyHolder.getKey().intValue());
-        return department;*/
-
         MapSqlParameterSource namedParametrs = new MapSqlParameterSource(
                 DEPARTMENT_NAME, department.getDepartmentName());
 
         Integer result = namedParameterJdbcTemplate.queryForObject(
-                departmentcheckDepartment, namedParametrs, Integer.class);
+                departmentCheckDepartment, namedParametrs, Integer.class);
 
         if (result == 0) {
             namedParametrs = new MapSqlParameterSource();
@@ -124,10 +129,6 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     @Override
     public void updateDepartment(final Department department) {
-        /*namedParameterJdbcTemplate.update(
-                UPDATE_DEPARTMENT_SQL,
-                new BeanPropertySqlParameterSource(department));*/
-
         SqlParameterSource namedParameter =
                 new BeanPropertySqlParameterSource(department);
         namedParameterJdbcTemplate.update(departmentUpdate, namedParameter);
