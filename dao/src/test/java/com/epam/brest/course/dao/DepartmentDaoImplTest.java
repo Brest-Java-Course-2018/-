@@ -21,6 +21,15 @@ import java.util.List;
 @Transactional
 public class DepartmentDaoImplTest {
 
+    public static final String DISTRIBUTION = "Distribution";
+    public static final String DISTRIBUTION_DEPARTMENT = "Distribution Department";
+    public static final String EDUCATION_AND_TRAINING = "Education and Training";
+    public static final String DEPARTMENT_OF_EDUCATION_AND_TRAINING = "Department of Education and Training";
+    public static final String DEPARTMENT_WITH_THE_SAME_NAME_ALREADY_EXISTS = "Department with the same name already exists";
+    public static final String EDUCATION = "Education";
+    public static final String DEPARTMENT_OF_EDUCATION = "Department of Education";
+    public static final String NEW_EDUCATION = "NEW Education";
+    public static final String NEW_DEPARTMENT_OF_EDUCATION = "NEW Department of Education";
     @Autowired
     DepartmentDao departmentDao;
 
@@ -35,18 +44,17 @@ public class DepartmentDaoImplTest {
         Department department = departmentDao.getDepartmentById(1);
         Assert.assertNotNull(department);
         Assert.assertTrue(department.getDepartmentId().equals(1));
+        Assert.assertTrue(department.getDepartmentName().equals(DISTRIBUTION));
         Assert.assertTrue(
-                department.getDepartmentName().equals("Distribution"));
-        Assert.assertTrue(
-                department.getDescription().equals("Distribution Department"));
+                department.getDescription().equals(DISTRIBUTION_DEPARTMENT));
     }
 
     @Test
     public void addDepartment() {
         List<Department> departments = departmentDao.getDepartments();
         int sizeBefore = departments.size();
-        Department department = new Department("Education and Training",
-                "Department Education and Training");
+        Department department = new Department(EDUCATION_AND_TRAINING,
+                DEPARTMENT_OF_EDUCATION_AND_TRAINING);
         Department newDepartment = departmentDao.addDepartment(department);
 
         Assert.assertNotNull(newDepartment);
@@ -60,8 +68,8 @@ public class DepartmentDaoImplTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void addSameDepartment() {
-        Department department = new Department("Education and Training",
-                "Department of Education and Training");
+        Department department = new Department(EDUCATION_AND_TRAINING,
+                DEPARTMENT_OF_EDUCATION_AND_TRAINING);
         departmentDao.addDepartment(department);
         departmentDao.addDepartment(department);
     }
@@ -71,22 +79,22 @@ public class DepartmentDaoImplTest {
 
     @Test
     public void addSameDepartmentWithRule() {
-        Department department = new Department("Education and Training",
-                "Department of Education and Training");
+        Department department = new Department(EDUCATION_AND_TRAINING,
+                DEPARTMENT_OF_EDUCATION_AND_TRAINING);
         departmentDao.addDepartment(department);
 
         thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("Department with the same name already exists");
+        thrown.expectMessage(DEPARTMENT_WITH_THE_SAME_NAME_ALREADY_EXISTS);
         departmentDao.addDepartment(department);
     }
 
     @Test
     public void updateDepartment() {
         Department department =
-                new Department("Education", "Department of Education");
+                new Department(EDUCATION, DEPARTMENT_OF_EDUCATION);
         Department newDepartment = departmentDao.addDepartment(department);
-        newDepartment.setDepartmentName("NEW Education");
-        newDepartment.setDescription("NEW Department of Education");
+        newDepartment.setDepartmentName(NEW_EDUCATION);
+        newDepartment.setDescription(NEW_DEPARTMENT_OF_EDUCATION);
         departmentDao.updateDepartment(newDepartment);
         Department updateDepartment = departmentDao.getDepartmentById(
                 newDepartment.getDepartmentId());
@@ -104,7 +112,7 @@ public class DepartmentDaoImplTest {
     @Test
     public void deleteDepartmentById() {
         Department department =
-                new Department("Education", "Department of Education");
+                new Department(EDUCATION, DEPARTMENT_OF_EDUCATION);
         department = departmentDao.addDepartment(department);
         List<Department> departments = departmentDao.getDepartments();
         int sizeBefore = departments.size();

@@ -17,6 +17,14 @@ public interface EmployeeDao {
     List<Employee> getEmployees();
 
     /**
+     * Get employee by department.
+     *
+     * @param departmentId department number.
+     * @return Employee.
+     */
+    List<Employee> getEmployeeByDepartmentId(Integer departmentId);
+
+    /**
      * Get employee.
      *
      * @param employeeId employee number.
