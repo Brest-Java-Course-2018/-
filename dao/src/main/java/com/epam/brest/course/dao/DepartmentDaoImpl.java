@@ -15,6 +15,7 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -87,7 +88,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     }
 
     @Override
-    public List<Department> getDepartments() {
+    public Collection<Department> getDepartments() {
         LOGGER.debug("getDepartments()");
         List<Department> departments =
                 namedParameterJdbcTemplate.getJdbcOperations().query(

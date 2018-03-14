@@ -18,17 +18,19 @@
     <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarsNav">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a href="departments.html" class="navbar-brand">
+    <a href="departments.html" th:href="@{/departments}" class="navbar-brand">
         <img src="../../resources/static/img/logo.svg" width="64" height="32"
              th:src="@{/resources/static/img/logo.svg}"/>
     </a>
     <div class="collapse navbar-collapse" id="navbarsNav">
         <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="departments.html">
+            <a class="nav-item nav-link active" href="departments.html"
+               th:href="@{/departments}">
                 Departments
                 <span class="sr-only">(current)</span>
             </a>
-            <a class="nav-item nav-link" href="employees.html">
+            <a class="nav-item nav-link" href="employees.html"
+               th:href="@{/employees}">
                 Employees
             </a>
         </div>
@@ -43,6 +45,7 @@
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a href="department.html"
+                   th:href="@{/department}"
                    class="btn btn-light"
                    data-toggle="tooltip"
                    data-placement="bottom"
@@ -61,7 +64,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col">
-                <div class="card">
+                <div class="card" th:if="not ${deps.isEmpty()}">
                     <table class="table table-striped">
                         <thead class="thead-inverse">
                             <tr>
@@ -71,11 +74,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>CEO</td>
+                            <tr th:each="dep : ${deps}">
+                                <td  th:text="${dep.departmentName}">CEO</td>
                                 <td>10000</td>
                                 <td class="text-right">
                                     <a href="department.html"
+                                       th:href="'/department/' + ${dep.departmentId}"
                                        data-toggle="tooltip"
                                        data-placement="top"
                                        title="Edit department"
@@ -99,7 +103,7 @@
                                     </span>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr th:remove="all">
                                 <td>&nbsp;&nbsp;&nbsp;&nbsp;Accounting</td>
                                 <td>2500</td>
                                 <td class="text-right">
@@ -127,7 +131,7 @@
                                     </span>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr  th:remove="all">
                                 <td>&nbsp;&nbsp;&nbsp;&nbsp;Development</td>
                                 <td>1150</td>
                                 <td class="text-right">
@@ -155,7 +159,7 @@
                                     </span>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr th:remove="all">
                                 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Java</td>
                                 <td>1500</td>
                                 <td class="text-right">
@@ -183,7 +187,7 @@
                                     </a>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr  th:remove="all">
                                 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Testing</td>
                                 <td>1100</td>
                                 <td class="text-right">
@@ -211,7 +215,7 @@
                                     </span>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr  th:remove="all">
                                 <td>&nbsp;&nbsp;People management</td>
                                 <td>800</td>
                                 <td class="text-right">
@@ -239,43 +243,12 @@
                                     </span>
                                 </td>
                             </tr>
-
-
-                            <!--<tr th:each="dep : ${deps}">-->
-                                <!--<td th:utext="${dep.departmentName}"></td>-->
-                                <!--<td th:utext="${dep.description}"></td>-->
-                                <!--<td class="text-right">-->
-                                    <!--<a data-toggle="tooltip"-->
-                                       <!--data-placement="top"-->
-                                       <!--title="Edit department"-->
-                                       <!--href="department.html"-->
-                                       <!--class="btn-sm btn-outline-secondary">-->
-                                        <!--<i class="fa fa-pencil"></i>-->
-                                        <!--<span class="d-none d-md-inline">-->
-                                            <!--Edit-->
-                                        <!--</span>-->
-                                    <!--</a>-->
-                                    <!--<span data-toggle="modal" data-target="#deleteDialog">-->
-                                        <!--<a data-toggle="tooltip"-->
-                                           <!--data-placement="top"-->
-                                           <!--title="Delete department"-->
-                                           <!--href="#"-->
-                                           <!--class="btn-sm btn-outline-secondary">-->
-                                            <!--<i class="fa fa-remove"></i>-->
-                                            <!--<span class="d-none d-md-inline">-->
-                                                <!--Delete-->
-                                            <!--</span>-->
-                                        <!--</a>-->
-                                    <!--</span>-->
-                                <!--</td>-->
-                            <!--</tr>-->
-
-
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+        <div class="card alert alert-info" th:if="${deps.isEmpty()}"></div>
     </div>
 </section>
 
