@@ -1,5 +1,7 @@
 package com.epam.brest.course.dao;
 
+import com.epam.brest.course.model.DTO.DepartmentDTO;
+import com.epam.brest.course.model.DTO.ShortDepartmentDTO;
 import com.epam.brest.course.model.Department;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,7 +18,6 @@ import org.springframework.jdbc.support.KeyHolder;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * CRUD for Department.
@@ -46,6 +47,16 @@ public class DepartmentDaoImpl implements DepartmentDao {
      */
     @Value("${department.select}")
     private String select;
+    /**
+     * Query for selectShortDTO.
+     */
+    @Value("${department.selectShortDTO}")
+    private String selectShortDTO;
+    /**
+     * Query for selectDTO.
+     */
+    @Value("${department.selectDTO}")
+    private String selectDTO;
     /**
      * Query for select by id.
      */
@@ -90,11 +101,31 @@ public class DepartmentDaoImpl implements DepartmentDao {
     @Override
     public Collection<Department> getDepartments() {
         LOGGER.debug("getDepartments()");
-        List<Department> departments =
+        Collection<Department> departments =
                 namedParameterJdbcTemplate.getJdbcOperations().query(
                         select, new DepartmentRowMapper());
         return departments;
 
+    }
+
+    @Override
+    public Collection<ShortDepartmentDTO> getShortDepartmentsDTO() {
+        LOGGER.debug("getShortDepartmentsDTo()");
+        Collection<ShortDepartmentDTO> shortDepartmentDTOS =
+                namedParameterJdbcTemplate.getJdbcOperations().query(
+                        selectShortDTO,
+                        BeanPropertyRowMapper.newInstance(ShortDepartmentDTO.class));
+        return shortDepartmentDTOS;
+    }
+
+    @Override
+    public Collection<DepartmentDTO> getDepartmentsDTO() {
+        LOGGER.debug("getDepartmentsDTO()");
+        Collection<DepartmentDTO> departmentDTOS =
+                namedParameterJdbcTemplate.getJdbcOperations().query(
+                        selectDTO,
+                        BeanPropertyRowMapper.newInstance(DepartmentDTO.class));
+        return departmentDTOS;
     }
 
     @Override

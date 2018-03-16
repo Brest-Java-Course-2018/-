@@ -22,6 +22,11 @@ public class Employee {
     private Integer salary;
 
     /**
+     * Property email.
+     */
+    private String mail;
+
+    /**
      * Property Id of department.
      */
     private Integer deptId;
@@ -37,13 +42,16 @@ public class Employee {
      *
      * @param employeeName name of Employee.
      * @param salary salary for Employee.
+     * @param mail email for Employee.
      * @param deptId index of department.
      */
     public Employee(final String employeeName,
                     final Integer salary,
+                    final String mail,
                     final Integer deptId) {
         this.employeeName = employeeName;
         this.salary = salary;
+        this.mail = mail;
         this.deptId = deptId;
     }
 
@@ -102,6 +110,24 @@ public class Employee {
     }
 
     /**
+     * Get employee Email.
+     *
+     * @return email.
+     */
+    public String getMail() {
+        return mail;
+    }
+
+    /**
+     * Set employee Email.
+     *
+     * @param mail new Email.
+     */
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    /**
      * Get employee deptId.
      *
      * @return id of department.
@@ -125,7 +151,7 @@ public class Employee {
                 + "employeeId=" + employeeId
                 + ", employeeName='" + employeeName
                 + '\'' + ", salary=" + salary
-                + ", deptId=" + deptId
-                + '}';
+                + ", mail='" + mail
+                + '\'' + ", deptId=" + deptId + '}';
     }
 }

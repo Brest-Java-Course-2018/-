@@ -8,10 +8,12 @@ CREATE TABLE department (
 
 DROP TABLE IF EXISTS employee;
 CREATE TABLE employee (
-  employeeId     INT          NOT NULL AUTO_INCREMENT
-  , employeeName VARCHAR(255) NOT NULL
-  , salary       INT          NOT NULL DEFAULT 0
-  , deptId       INT          NOT NULL
+   employeeId   INT          NOT NULL AUTO_INCREMENT
+  ,employeeName VARCHAR(255) NOT NULL
+  ,salary       INT          NOT NULL DEFAULT 0
+  ,
+   mail         VARCHAR(255) NOT NULL
+  ,deptId       INT          NOT NULL
   , PRIMARY KEY (employeeId)
   , CONSTRAINT empl_to_dept_fk
     FOREIGN KEY (deptId)

@@ -75,14 +75,17 @@
                         </thead>
                         <tbody>
                             <tr th:each="dep : ${deps}">
-                                <td  th:text="${dep.departmentName}">CEO</td>
-                                <td>10000</td>
+                                <td th:text="${dep.employeeId} ? '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + ${dep.departmentName} : ${dep.departmentName}">
+                                    CEO
+                                </td>
+                                <td th:text="${dep.AVGsalary}">10000</td>
                                 <td class="text-right">
                                     <a href="department.html"
-                                       th:href="'/department/' + ${dep.departmentId}"
+                                       th:href="${dep.employeeId} ? '/employee/' + ${dep.employeeId} : '/department/' + ${dep.departmentId}"
                                        data-toggle="tooltip"
                                        data-placement="top"
                                        title="Edit department"
+                                       th:title="${dep.employeeId} ? 'Edit employee' : 'Edit department'"
                                        class="btn-sm btn-outline-secondary">
                                         <i class="fa fa-pencil"></i>
                                         <span class="d-none d-md-inline">
@@ -94,6 +97,7 @@
                                            data-toggle="tooltip"
                                            data-placement="top"
                                            title="Delete department"
+                                           th:title="${dep.employeeId} ? 'Delete employee' : 'Delete department'"
                                            class="btn-sm btn-outline-secondary">
                                             <i class="fa fa-remove"></i>
                                             <span class="d-none d-md-inline">

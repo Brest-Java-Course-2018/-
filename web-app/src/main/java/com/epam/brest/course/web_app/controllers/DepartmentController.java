@@ -1,5 +1,6 @@
 package com.epam.brest.course.web_app.controllers;
 
+import com.epam.brest.course.model.DTO.DepartmentDTO;
 import com.epam.brest.course.model.Department;
 import com.epam.brest.course.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import java.util.Collection;
 public class DepartmentController {
 
     @Autowired
-    DepartmentService departmentService;
+    private DepartmentService departmentService;
 
     /**
      * Goto departments page.
@@ -26,10 +27,21 @@ public class DepartmentController {
      */
     @GetMapping(value = "/departments")
     public final String getDepartmentById(Model model) {
-        Collection<Department> departments =
-                departmentService.getDepartments();
+        Collection<DepartmentDTO> departments =
+                departmentService.getDepartmentsDTO();
         model.addAttribute("deps", departments);
         return "departments";
+    }
+
+    /**
+     * Goto department page
+     *
+     * @return view name.
+     */
+    @GetMapping(value = "/department")
+    public final String department(Model model) {
+        model.addAttribute("type", "add");
+        return "department";
     }
 
     /**
@@ -43,6 +55,13 @@ public class DepartmentController {
                                    Model model) {
         Department department = departmentService.getDepartmentById(id);
         model.addAttribute("department", department);
+        model.addAttribute("type", "change");
         return "department";
     }
+
+//    @RequestMapping
+//    public final String getDeleteDepartment(@RequestParam("depId") int depId, Model model) {
+//        departmentService.deleteDepartmentById(depId);
+//        return "redirect:departments";
+//    }
 }

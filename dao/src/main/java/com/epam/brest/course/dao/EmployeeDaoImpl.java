@@ -39,6 +39,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
     /**
      * Constant variable.
      */
+    public static final String EMPLOYEE_MAIL = "mail";
+    /**
+     * Constant variable.
+     */
     public static final String EMPLOYEE_DEPT_ID = "deptId";
 
     /**

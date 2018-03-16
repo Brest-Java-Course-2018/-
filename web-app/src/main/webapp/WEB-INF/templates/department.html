@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Edit department</title>
+    <title th:text="${type} == 'add' ? 'Add department' : 'Change department'">Edit department</title>
     <link rel="stylesheet" href="../../resources/static/css/font-awesome.min.css"
           th:href="@{/resources/static/css/font-awesome.min.css}"/>
     <link rel="stylesheet" href="../../resources/static/css/bootstrap.css"
@@ -87,7 +87,7 @@
                                 <input class="form-control"
                                        id="field_departmentName"
                                        type="text" placeholder="CEO"
-                                       th:value="${department.departmentName}"/>
+                                       th:value="${type} == 'change' ? ${department.departmentName} : ''"/>
                             </div>
                             <div class="form-group">
                                 <label class="form-control-label"
@@ -97,7 +97,7 @@
                                 <input class="form-control"
                                        id="form-control-label"
                                        type="text" placeholder="CEO department"
-                                       th:value="${department.description}"/>
+                                       th:value="${type} == 'change' ? ${department.description} : ''"/>
                             </div>
                         </form>
                     </div>

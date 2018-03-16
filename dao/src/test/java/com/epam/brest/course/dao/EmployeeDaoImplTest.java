@@ -1,8 +1,8 @@
 package com.epam.brest.course.dao;
 
 import com.epam.brest.course.model.Employee;
-import org.junit.Test;
 import org.junit.Assert;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
@@ -22,9 +22,11 @@ public class EmployeeDaoImplTest {
     public static final String IVAN_IVANOV = "Ivan Ivanov";
     public static final int SALARY_IVAN_IVANOV = 500;
     public static final String NICK = "Nick";
+    public static final String IVAN_MAIL = "qwerty@gmail.com";
     public static final int SALARY_NICK = 1000;
     public static final String NICK_SMITH = "Nick Smith";
     public static final int SALARY_NICK_SMITH = 1100;
+    public static final String NICK_SMITH_MAIL = "asdfg@gmail.com";
     @Autowired
     EmployeeDao employeeDao;
 
@@ -41,6 +43,7 @@ public class EmployeeDaoImplTest {
         Assert.assertTrue(employee.getEmployeeId().equals(1));
         Assert.assertTrue(employee.getEmployeeName().equals(IVAN_IVANOV));
         Assert.assertTrue(employee.getSalary().equals(SALARY_IVAN_IVANOV));
+        Assert.assertTrue(employee.getMail().equals(IVAN_MAIL));
         Assert.assertTrue(employee.getDeptId().equals(1));
     }
 
@@ -55,7 +58,7 @@ public class EmployeeDaoImplTest {
     public void addEmployee() {
         List<Employee> employees = employeeDao.getEmployees();
         int sizeBefore = employees.size();
-        Employee employee = new Employee(NICK, SALARY_NICK, 1);
+        Employee employee = new Employee(NICK, SALARY_NICK, NICK_SMITH_MAIL, 1);
         Employee newEmployee = employeeDao.addEmployee(employee);
 
         Assert.assertNotNull(newEmployee);
@@ -63,6 +66,8 @@ public class EmployeeDaoImplTest {
                 employee.getEmployeeName()));
         Assert.assertTrue(newEmployee.getSalary().equals(
                 employee.getSalary()));
+        Assert.assertTrue(newEmployee.getMail().equals(
+                employee.getMail()));
         Assert.assertTrue(newEmployee.getDeptId().equals(
                 employee.getDeptId()));
         Assert.assertTrue(sizeBefore + 1 == employeeDao.getEmployees().size());
@@ -70,10 +75,11 @@ public class EmployeeDaoImplTest {
 
     @Test
     public void updateEmployee() {
-        Employee employee = new Employee(NICK, SALARY_NICK, 1);
+        Employee employee = new Employee(NICK, SALARY_NICK, NICK_SMITH_MAIL, 1);
         Employee newEmployee = employeeDao.addEmployee(employee);
         newEmployee.setEmployeeName(NICK_SMITH);
         newEmployee.setSalary(SALARY_NICK_SMITH);
+        newEmployee.setMail(NICK_SMITH_MAIL);
         employeeDao.updateEmployee(newEmployee);
         Employee updateDepartment = employeeDao.getEmployeeById(
                 newEmployee.getEmployeeId());
@@ -84,13 +90,15 @@ public class EmployeeDaoImplTest {
                 newEmployee.getEmployeeName()));
         Assert.assertTrue(updateDepartment.getSalary().equals(
                 newEmployee.getSalary()));
+        Assert.assertTrue(updateDepartment.getMail().equals(
+                newEmployee.getMail()));
         Assert.assertTrue(updateDepartment.getDeptId().equals(
                 newEmployee.getDeptId()));
     }
 
     @Test
     public void deleteEmployeeById() {
-        Employee employee = new Employee(NICK, SALARY_NICK, 1);
+        Employee employee = new Employee(NICK, SALARY_NICK, NICK_SMITH_MAIL, 1);
         employee = employeeDao.addEmployee(employee);
         List<Employee> employees = employeeDao.getEmployees();
         int sizeBefore = employees.size();
