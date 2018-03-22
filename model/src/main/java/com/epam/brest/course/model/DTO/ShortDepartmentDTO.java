@@ -1,5 +1,8 @@
 package com.epam.brest.course.model.DTO;
 
+/**
+ * DTO Department for page employee.
+ */
 public class ShortDepartmentDTO {
 
     /**

@@ -35,9 +35,27 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
+    public Collection<Department> getDepartments() {
+        LOGGER.debug("getDepartments()");
+        return departmentDao.getDepartments();
+    }
+
+    @Override
     public Department getDepartmentById(final Integer departmentId) {
         LOGGER.debug("getDepartmentById({})", departmentId);
         return departmentDao.getDepartmentById(departmentId);
+    }
+
+    @Override
+    public Department addDepartment(Department department) {
+        LOGGER.debug("addDepartment({})", department);
+        return departmentDao.addDepartment(department);
+    }
+
+    @Override
+    public void updateDepartment(Department department) {
+        LOGGER.debug("updateDepartment({})", department);
+        departmentDao.updateDepartment(department);
     }
 
     @Override
@@ -63,7 +81,8 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public void deleteDepartmentById(Integer id) {
+    public void deleteDepartmentById(final Integer id) {
+        LOGGER.debug("deleteDepartmentById({})", id);
         departmentDao.deleteDepartmentById(id);
     }
 }

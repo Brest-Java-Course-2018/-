@@ -18,15 +18,22 @@ import java.util.Collection;
 @Controller
 public class EmployeeController {
 
+    /**
+     * EmployeeService.
+     */
     @Autowired
     private EmployeeService employeeService;
 
+    /**
+     * DepartmentService.
+     */
     @Autowired
     private DepartmentService departmentService;
 
     /**
      * Goto employees page.
      *
+     * @param model model.
      * @return view name.
      */
     @GetMapping(value = "/employees")
@@ -39,6 +46,7 @@ public class EmployeeController {
     /**
      * Goto employee page.
      *
+     * @param model model.
      * @return view name.
      */
     @GetMapping(value = "/employee")
@@ -53,10 +61,12 @@ public class EmployeeController {
     /**
      * Goto employee page.
      *
+     * @param id employee id.
+     * @param model model.
      * @return view name.
      */
     @GetMapping(value = "/employee/{id}")
-    public String employee(@PathVariable Integer id, Model model) {
+    public String employee(final @PathVariable Integer id, Model model) {
         Employee employee = employeeService.getEmployeeById(id);
         Collection<ShortDepartmentDTO> shortDepartmentDTOS =
                 departmentService.getShortDepartmentsDTO();

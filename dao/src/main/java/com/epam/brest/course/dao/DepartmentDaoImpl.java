@@ -114,7 +114,8 @@ public class DepartmentDaoImpl implements DepartmentDao {
         Collection<ShortDepartmentDTO> shortDepartmentDTOS =
                 namedParameterJdbcTemplate.getJdbcOperations().query(
                         selectShortDTO,
-                        BeanPropertyRowMapper.newInstance(ShortDepartmentDTO.class));
+                        BeanPropertyRowMapper.newInstance(
+                                ShortDepartmentDTO.class));
         return shortDepartmentDTOS;
     }
 

@@ -11,8 +11,8 @@ VALUES (5, 'Testing', 'Testing Department');
 INSERT INTO department (departmentId, departmentName, description)
 VALUES (6, 'People', 'People management');
 
-INSERT INTO employee (employeeName, salary, mail, deptId) VALUES ('Ivan Ivanov', 500, 'ivan@CEO.com', 1);
-INSERT INTO employee (employeeName, salary, mail, deptId) VALUES ('David Glass', 10000, 'david@CEO.com', 1);
+INSERT INTO employee (employeeName, salary, mail, deptId) VALUES ('Ivan Ivanov', 500, 'ivan@CEO.bin', 1);
+INSERT INTO employee (employeeName, salary, mail, deptId) VALUES ('David Glass', 10000, 'david@CEO.au', 1);
 INSERT INTO employee (employeeName, salary, mail, deptId)
 VALUES ('Coletta Stoltzfus', 600, 'coletta@Accounting.com', 2);
 INSERT INTO employee (employeeName, salary, mail, deptId) VALUES ('Alex Kyznecov', 550, 'alex@Accounting.com', 2);

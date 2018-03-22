@@ -81,7 +81,7 @@
                                 <td th:text="${dep.AVGsalary}">10000</td>
                                 <td class="text-right">
                                     <a href="department.html"
-                                       th:href="${dep.employeeId} ? '/employee/' + ${dep.employeeId} : '/department/' + ${dep.departmentId}"
+                                       th:href="@{|/department/${dep.departmentId}|}"
                                        data-toggle="tooltip"
                                        data-placement="top"
                                        title="Edit department"
@@ -92,7 +92,9 @@
                                             Edit
                                         </span>
                                     </a>
-                                    <span data-toggle="modal" data-target="#deleteDialog">
+                                    <span data-toggle="modal"
+                                          data-target="#deleteDialog"
+                                          th:attr="data-id=${dep.departmentId},data-name=${dep.departmentName}">
                                         <a href="#"
                                            data-toggle="tooltip"
                                            data-placement="top"
@@ -276,9 +278,7 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
                     Cancel
                 </button>
-                <button type="button" class="btn btn-danger">
-                    Delete
-                </button>
+                <a id="deleteUrl" href="#" class="btn btn-danger">Delete</a>
             </div>
         </div>
     </div>
@@ -293,6 +293,11 @@
 <script>
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
+    })
+    $('#deleteDialog').on('show.bs.modal', function (event) {
+        var target = $(event.relatedTarget)
+        $(this).find('.modal-body').text('Please confirm delete departmet: "' + target.data('name') + '"')
+        document.getElementById('deleteUrl').href = '/department/' + target.data('id') + '/delete';
     })
 </script>
 </body>

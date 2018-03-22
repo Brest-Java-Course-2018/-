@@ -1,5 +1,8 @@
 package com.epam.brest.course.model.DTO;
 
+/**
+ * DTO Department for main page.
+ */
 public class DepartmentDTO {
 
     /**

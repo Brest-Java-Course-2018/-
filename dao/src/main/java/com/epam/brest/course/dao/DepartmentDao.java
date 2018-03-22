@@ -12,23 +12,23 @@ import java.util.Collection;
 public interface DepartmentDao {
 
     /**
-     * Get list of departments.
+     * Get collection of departments.
      *
-     * @return List of objects Department.
+     * @return Collection of objects Department.
      */
     Collection<Department> getDepartments();
 
     /**
-     * Get list of departments.
+     * Get collection of departments.
      *
-     * @return Short list of objects Department.
+     * @return Short collection of objects Department.
      */
     Collection<ShortDepartmentDTO> getShortDepartmentsDTO();
 
     /**
-     * Get list of departments.
+     * Get collection of departments.
      *
-     * @return List of objects Department.
+     * @return Collection of objects Department.
      */
     Collection<DepartmentDTO> getDepartmentsDTO();
 

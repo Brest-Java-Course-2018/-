@@ -27,7 +27,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      *
      * @param employeeDao new employeeDao.
      */
-    public EmployeeServiceImpl(EmployeeDao employeeDao) {
+    public EmployeeServiceImpl(final EmployeeDao employeeDao) {
         this.employeeDao = employeeDao;
     }
 
@@ -38,7 +38,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee getEmployeeById(Integer employeeId) {
+    public Employee getEmployeeById(final Integer employeeId) {
         LOGGER.debug("getEmployeeById({})", employeeId);
         return employeeDao.getEmployeeById(employeeId);
     }

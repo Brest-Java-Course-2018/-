@@ -3,15 +3,20 @@ package com.epam.brest.course.service;
 import com.epam.brest.course.model.DTO.DepartmentDTO;
 import com.epam.brest.course.model.DTO.ShortDepartmentDTO;
 import com.epam.brest.course.model.Department;
-import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
 /**
  * Departmen Service Interface.
  */
-@Service
 public interface DepartmentService {
+
+    /**
+     * Get list department.
+     *
+     * @return Departments.
+     */
+    Collection<Department> getDepartments();
 
     /**
      * Get department.
@@ -20,6 +25,21 @@ public interface DepartmentService {
      * @return Department.
      */
     Department getDepartmentById(Integer departmentId);
+
+    /**
+     * Persist new department.
+     *
+     * @param department new department.
+     * @return department department with id.
+     */
+    Department addDepartment(Department department);
+
+    /**
+     * Update department.
+     *
+     * @param department department
+     */
+    void updateDepartment(Department department);
 
     /**
      * Update department.
