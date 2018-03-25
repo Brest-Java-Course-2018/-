@@ -78,7 +78,7 @@
                                 <td th:text="${dep.employeeId} ? '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + ${dep.departmentName} : ${dep.departmentName}">
                                     CEO
                                 </td>
-                                <td th:text="${dep.AVGsalary}">10000</td>
+                                <td th:text="${dep.AVGsalary} ? ${dep.AVGsalary} : 0">10000</td>
                                 <td class="text-right">
                                     <a href="department.html"
                                        th:href="@{|/department/${dep.departmentId}|}"
@@ -94,8 +94,9 @@
                                     </a>
                                     <span data-toggle="modal"
                                           data-target="#deleteDialog"
-                                          th:attr="data-id=${dep.departmentId},data-name=${dep.departmentName}">
-                                        <a href="#"
+                                          th:attr="data-id=${dep.departmentId},data-name=${dep.departmentName}, data-avg=${dep.AVGsalary}">
+                                        <a id="delete_button"
+                                           href="#"
                                            data-toggle="tooltip"
                                            data-placement="top"
                                            title="Delete department"
@@ -278,6 +279,7 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
                     Cancel
                 </button>
+                <!--TODO You should to change string in js function, if you change parameters in class-->
                 <a id="deleteUrl" href="#" class="btn btn-danger">Delete</a>
             </div>
         </div>
@@ -295,9 +297,14 @@
         $('[data-toggle="tooltip"]').tooltip()
     })
     $('#deleteDialog').on('show.bs.modal', function (event) {
-        var target = $(event.relatedTarget)
-        $(this).find('.modal-body').text('Please confirm delete departmet: "' + target.data('name') + '"')
-        document.getElementById('deleteUrl').href = '/department/' + target.data('id') + '/delete';
+        var target = $(event.relatedTarget);
+        $(this).find('.modal-body').text('Please confirm delete departmet: "' + target.data('name') + '"');
+        if (typeof target.data('avg') === "undefined") {
+            document.getElementById('deleteUrl').href = '/department/' + target.data('id') + '/delete';
+            document.getElementById('deleteUrl').className = "btn btn-danger";
+        } else {
+            document.getElementById('deleteUrl').className += " disabled";
+        }
     })
 </script>
 </body>
