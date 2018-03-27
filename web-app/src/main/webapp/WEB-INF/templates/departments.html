@@ -95,8 +95,7 @@
                                     <span data-toggle="modal"
                                           data-target="#deleteDialog"
                                           th:attr="data-id=${dep.departmentId},data-name=${dep.departmentName}, data-avg=${dep.AVGsalary}">
-                                        <a id="delete_button"
-                                           href="#"
+                                        <a href="#"
                                            data-toggle="tooltip"
                                            data-placement="top"
                                            title="Delete department"
@@ -279,7 +278,6 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
                     Cancel
                 </button>
-                <!--TODO You should to change string in js function, if you change parameters in class-->
                 <a id="deleteUrl" href="#" class="btn btn-danger">Delete</a>
             </div>
         </div>
@@ -301,7 +299,8 @@
         $(this).find('.modal-body').text('Please confirm delete departmet: "' + target.data('name') + '"');
         if (typeof target.data('avg') === "undefined") {
             document.getElementById('deleteUrl').href = '/department/' + target.data('id') + '/delete';
-            document.getElementById('deleteUrl').className = "btn btn-danger";
+            document.getElementById('deleteUrl').className =
+                document.getElementById('deleteUrl').className.replace(" disabled", "");
         } else {
             document.getElementById('deleteUrl').className += " disabled";
         }

@@ -17,7 +17,7 @@ INSERT INTO employee (employeeName, salary, mail, deptId)
 VALUES ('Coletta Stoltzfus', 600, 'coletta@Accounting.com', 2);
 INSERT INTO employee (employeeName, salary, mail, deptId) VALUES ('Alex Kyznecov', 550, 'alex@Accounting.com', 2);
 INSERT INTO employee (employeeName, salary, mail, deptId)
-VALUES ('Sidorenko Aliaksei', 450, '@aliakseyDevelopment.com', 3);
+VALUES ('Sidorenko Aliaksei', 450, 'aliaksey@Development.com', 3);
 INSERT INTO employee (employeeName, salary, mail, deptId) VALUES ('Olha Ivanova', 350, 'olha@Development.com', 3);
 INSERT INTO employee (employeeName, salary, mail, deptId) VALUES ('Ivan Petrov', 450, 'ivan@Java.com', 4);
 INSERT INTO employee (employeeName, salary, mail, deptId) VALUES ('Alex Petrov', 550, 'alex@Java.com', 4);

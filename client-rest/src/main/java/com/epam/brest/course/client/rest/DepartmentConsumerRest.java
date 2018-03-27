@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collection;
-import java.util.List;
 
 public class DepartmentConsumerRest implements DepartmentService {
 
@@ -58,8 +57,8 @@ public class DepartmentConsumerRest implements DepartmentService {
     @Override
     @SuppressWarnings("unchecked")
     public Collection<DepartmentDTO> getDepartmentsDTO() {
-        ResponseEntity responseEntity = restTemplate.getForEntity(url, List.class);
-        List<DepartmentDTO> departments = (List<DepartmentDTO>) responseEntity.getBody();
+        ResponseEntity responseEntity = restTemplate.getForEntity(url, Collection.class);
+        Collection<DepartmentDTO> departments = (Collection<DepartmentDTO>) responseEntity.getBody();
         return departments;
     }
 
