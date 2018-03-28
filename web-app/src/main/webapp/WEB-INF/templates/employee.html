@@ -53,13 +53,15 @@
                 </a>
             </li>
         </ul>
-        <span class="navbar-brand text-uppercase mr-auto">
+        <span class="navbar-brand text-uppercase mr-auto"
+              th:text="${type} == 'add' ? 'New employee' : 'Edit employee'">
             Edit employee
         </span>
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a href="employees.html"
-                   th:href="@{/employees}"
+                   th:href="@{/employee}"
+                   th:onclick="@{document.forms['employeeForm'].submit(); return false;}"
                    class="btn btn-light"
                    data-toggle="tooltip"
                    data-placement="bottom"
@@ -74,20 +76,35 @@
     </nav>
 </header>
 
-<section id="department">
+<section id="employee">
     <div class="container-fluid">
         <div class="row">
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <form>
+                        <form id="employeeForm"
+                              th:object="${employee}"
+                              action="employees.html"
+                              th:action="@{${#httpServletRequest.servletPath}}"
+                              th:method="@{post}">
+
+                            <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                                <p>Please fix errors below:</p>
+                            </div>
+
+                            <input id="field_employeetId"
+                                   name="field_employeeId"
+                                   type="hidden"
+                                   th:field="*{employeeId}"/>
+
                             <div class="form-group">
                                 <label class="form-control-label"
                                        for="field_departmentName">
                                     Department
                                 </label>
-                                <select class="form-control"
-                                        id="field_departmentName">
+                                <select class="custom-select"
+                                        id="field_departmentName"
+                                        th:field="*{deptId}">
                                     <option th:each="department : ${departments}"
                                             th:value="${department.departmentId}"
                                             th:text="${department.departmentName}"
@@ -96,15 +113,50 @@
                                     </option>
                                 </select>
                             </div>
-                            <div class="form-group">
+
+                            <div class="form-group"
+                                 th:class="${#fields.hasErrors('employeeName')} ? 'form-group has-error' : 'form-group'">
                                 <label class="form-control-label"
-                                       for="form-control-label">
+                                       for="field_employeeName">
                                     Employee name
                                 </label>
                                 <input class="form-control"
-                                       id="form-control-label"
+                                       id="field_employeeName"
+                                       name="field_employeeName"
                                        type="text" placeholder="Ivan Ivanov"
-                                       th:value="${type} == 'change' ? ${employee.employeeName} : ''"/>
+                                       th:field="*{employeeName}"/>
+                                <div class="form-text text-danger"
+                                     th:if="${#fields.hasErrors('employeeName')}"
+                                     th:errors="*{employeeName}">[errors]
+                                </div>
+
+                                <label class="form-control-label"
+                                       for="field_mail">
+                                    Email
+                                </label>
+                                <input class="form-control"
+                                       id="field_mail"
+                                       name="field_mail"
+                                       type="email" placeholder="google@gmail.com"
+                                       th:field="*{mail}"/>
+                                <div class="form-text text-danger"
+                                     th:if="${#fields.hasErrors('mail')}"
+                                     th:errors="*{mail}">[errors]
+                                </div>
+
+                                <label class="form-control-label"
+                                       for="field_salary">
+                                    Salary
+                                </label>
+                                <input class="form-control"
+                                       id="field_salary"
+                                       name="field_salary"
+                                       type="number"
+                                       th:field="*{salary}"/>
+                                <div class="form-text text-danger"
+                                     th:if="${#fields.hasErrors('salary')}"
+                                     th:errors="*{salary}">[errors]
+                                </div>
                             </div>
                         </form>
                     </div>

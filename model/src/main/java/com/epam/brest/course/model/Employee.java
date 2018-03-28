@@ -1,5 +1,10 @@
 package com.epam.brest.course.model;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Size;
+
 /**
  * POJO Employee for model.
  */
@@ -13,17 +18,22 @@ public class Employee {
     /**
      * Property Name.
      */
+    @NotEmpty
+    @Size(min = 3, max = 255)
     private String employeeName;
 
 
     /**
      * Property Salary.
      */
+    @PositiveOrZero
     private Integer salary;
 
     /**
      * Property email.
      */
+    @NotEmpty
+    @Email
     private String mail;
 
     /**

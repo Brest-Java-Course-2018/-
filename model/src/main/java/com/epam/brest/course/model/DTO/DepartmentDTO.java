@@ -16,9 +16,9 @@ public class DepartmentDTO {
     private String departmentName;
 
     /**
-     * Property AVGsalary.
+     * Property avgSalary.
      */
-    private String AVGsalary;
+    private String avgSalary;
 
     /**
      * Property Id.
@@ -62,21 +62,21 @@ public class DepartmentDTO {
     }
 
     /**
-     * Get department AVGsalary.
+     * Get department avgSalary.
      *
-     * @return AVGsalary.
+     * @return avgSalary.
      */
-    public String getAVGsalary() {
-        return AVGsalary;
+    public String getAvgSalary() {
+        return avgSalary;
     }
 
     /**
-     * Set department AVGsalary.
+     * Set department avgSalary.
      *
-     * @param AVGsalary new Name.
+     * @param avgSalary new Name.
      */
-    public void setAVGsalary(final String AVGsalary) {
-        this.AVGsalary = AVGsalary;
+    public void setAvgSalary(final String avgSalary) {
+        this.avgSalary = avgSalary;
     }
 
     /**
@@ -102,7 +102,7 @@ public class DepartmentDTO {
         return "DepartmentDTO{"
                 + "departmentId=" + departmentId
                 + ", departmentName='" + departmentName
-                + '\'' + ", AVGsalary='" + AVGsalary
+                + '\'' + ", avgSalary='" + avgSalary
                 + '\'' + ", employeeId=" + employeeId
                 + '}';
     }

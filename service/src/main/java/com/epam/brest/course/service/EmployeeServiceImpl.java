@@ -38,8 +38,26 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee getEmployeeById(final Integer employeeId) {
+    public Employee getEmployeeById(Integer employeeId) {
         LOGGER.debug("getEmployeeById({})", employeeId);
         return employeeDao.getEmployeeById(employeeId);
+    }
+
+    @Override
+    public Employee addEmployee(Employee employee) {
+        LOGGER.debug("addEmployee({})", employee);
+        return employeeDao.addEmployee(employee);
+    }
+
+    @Override
+    public void updateEmployee(Employee employee) {
+        LOGGER.debug("updateEmployee({})", employee);
+        employeeDao.updateEmployee(employee);
+    }
+
+    @Override
+    public void deleteEmployeeById(Integer id) {
+        LOGGER.debug("deleteEmployeeById({})", id);
+        employeeDao.deleteEmployeeById(id);
     }
 }

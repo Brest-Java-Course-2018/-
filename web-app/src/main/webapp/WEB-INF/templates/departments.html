@@ -78,7 +78,7 @@
                                 <td th:text="${dep.employeeId} ? '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + ${dep.departmentName} : ${dep.departmentName}">
                                     CEO
                                 </td>
-                                <td th:text="${dep.AVGsalary} ? ${dep.AVGsalary} : 0">10000</td>
+                                <td th:text="${dep.avgSalary} ? ${dep.avgSalary} : 0">10000</td>
                                 <td class="text-right">
                                     <a href="department.html"
                                        th:href="@{|/department/${dep.departmentId}|}"
@@ -94,7 +94,7 @@
                                     </a>
                                     <span data-toggle="modal"
                                           data-target="#deleteDialog"
-                                          th:attr="data-id=${dep.departmentId},data-name=${dep.departmentName}, data-avg=${dep.AVGsalary}">
+                                          th:attr="data-id=${dep.departmentId},data-name=${dep.departmentName}, data-avg=${dep.avgSalary}">
                                         <a href="#"
                                            data-toggle="tooltip"
                                            data-placement="top"

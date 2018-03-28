@@ -25,4 +25,26 @@ public interface EmployeeService {
      * @return Employee.
      */
     Employee getEmployeeById(Integer employeeId);
+
+    /**
+     * Persist new employee.
+     *
+     * @param employee new employee.
+     * @return employee employee with id.
+     */
+    Employee addEmployee(Employee employee);
+
+    /**
+     * Update employee.
+     *
+     * @param employee employee.
+     */
+    void updateEmployee(Employee employee);
+
+    /**
+     * Delete employee.
+     *
+     * @param id what employee to remove.
+     */
+    void deleteEmployeeById(Integer id);
 }

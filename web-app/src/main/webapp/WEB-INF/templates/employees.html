@@ -89,7 +89,9 @@
                                                 Edit
                                             </span>
                                     </a>
-                                    <span data-toggle="modal" data-target="#deleteDialog">
+                                    <span data-toggle="modal"
+                                          data-target="#deleteDialog"
+                                          th:attr="data-id=${employee.employeeId},data-name=${employee.employeeName}">
                                             <a href="#"
                                                data-toggle="tooltip"
                                                data-placement="top"
@@ -100,7 +102,7 @@
                                                     Delete
                                                 </span>
                                             </a>
-                                        </span>
+                                    </span>
                                 </td>
                             </tr>
                         <tr th:remove="all">
@@ -161,9 +163,7 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
                     Cancel
                 </button>
-                <button type="button" class="btn btn-danger">
-                    Delete
-                </button>
+                <a id="deleteUrl" href="#" class="btn btn-danger">Delete</a>
             </div>
         </div>
     </div>
@@ -178,6 +178,11 @@
 <script>
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
+    })
+    $('#deleteDialog').on('show.bs.modal', function (event) {
+        var target = $(event.relatedTarget);
+        $(this).find('.modal-body').text('Please confirm delete employee: "' + target.data('name') + '"');
+        document.getElementById('deleteUrl').href = '/employee/' + target.data('id') + '/delete';
     })
 </script>
 </body>

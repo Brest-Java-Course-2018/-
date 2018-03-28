@@ -4,12 +4,16 @@ import com.epam.brest.course.model.DTO.DepartmentDTO;
 import com.epam.brest.course.model.DTO.ShortDepartmentDTO;
 import com.epam.brest.course.model.Department;
 import com.epam.brest.course.service.DepartmentService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collection;
 
 public class DepartmentConsumerRest implements DepartmentService {
+
+    private static final Logger LOGGER = LogManager.getLogger();
 
     private String url;
 
@@ -57,6 +61,7 @@ public class DepartmentConsumerRest implements DepartmentService {
     @Override
     @SuppressWarnings("unchecked")
     public Collection<DepartmentDTO> getDepartmentsDTO() {
+        LOGGER.debug("getDepartmentsDTO()");
         ResponseEntity responseEntity = restTemplate.getForEntity(url, Collection.class);
         Collection<DepartmentDTO> departments = (Collection<DepartmentDTO>) responseEntity.getBody();
         return departments;

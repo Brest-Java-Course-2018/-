@@ -7,7 +7,7 @@ import com.epam.brest.course.model.Department;
 import java.util.Collection;
 
 /**
- * Departmen DAO Interface.
+ * Department DAO Interface.
  */
 public interface DepartmentDao {
 
