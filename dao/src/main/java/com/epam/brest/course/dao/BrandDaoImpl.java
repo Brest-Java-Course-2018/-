@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -175,9 +174,6 @@ public class BrandDaoImpl implements BrandDao {
         LOGGER.debug("deleteBrand({})", brandId);
         Brand brand = getBrandById(brandId);
         LOGGER.debug("{}", brand);
-        if (brand == null) {
-            throw new EmptyResultDataAccessException(brandId);
-        }
         namedParameterJdbcTemplate.getJdbcOperations()
                 .update(delete, brandId);
     }

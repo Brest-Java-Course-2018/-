@@ -33,6 +33,11 @@ public class CarDTO {
     private Date carDateOfSale;
 
     /**
+     * Property brand id.
+     */
+    private Integer brId;
+
+    /**
      * Constructor without parameters for CarDTO.
      */
     public CarDTO() {
@@ -43,10 +48,13 @@ public class CarDTO {
      *
      * @param carName name of Car.
      * @param carDateOfSale date of sale Car.
+     * @param brId brand id.
      */
-    public CarDTO(final String carName, final Date carDateOfSale) {
+    public CarDTO(final String carName,
+                  final Date carDateOfSale, final Integer brId) {
         this.carName = carName;
         this.carDateOfSale = carDateOfSale;
+        this.brId = brId;
     }
 
     /**
@@ -103,12 +111,31 @@ public class CarDTO {
         this.carDateOfSale = carDateOfSale;
     }
 
+    /**
+     * Get brand id of a car.
+     *
+     * @return brand Id.
+     */
+    public Integer getBrId() {
+        return brId;
+    }
+
+    /**
+     * Set brand Id.
+     *
+     * @param brId brand Id.
+     */
+    public void setBrId(final Integer brId) {
+        this.brId = brId;
+    }
+
     @Override
     public String toString() {
         return "CarDTO{"
                 + "carId=" + carId
                 + ", carName='" + carName + '\''
                 + ", carDateOfSale=" + carDateOfSale
+                + ", brId=" + brId
                 + '}';
     }
 }

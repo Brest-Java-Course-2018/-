@@ -38,6 +38,11 @@ public class Car {
     private String carDescription;
 
     /**
+     * Property brand id.
+     */
+    private Integer brId;
+
+    /**
      * Constructor without parameters for Car.
      */
     public Car() {
@@ -49,12 +54,14 @@ public class Car {
      * @param carName name of Car.
      * @param carDateOfSale date of sale Car.
      * @param carDescription description of Car.
+     * @param brId brand id.
      */
     public Car(final String carName, final Date carDateOfSale,
-               final String carDescription) {
+               final String carDescription, final Integer brId) {
         this.carName = carName;
         this.carDateOfSale = carDateOfSale;
         this.carDescription = carDescription;
+        this.brId = brId;
     }
 
     /**
@@ -129,6 +136,24 @@ public class Car {
         this.carDescription = carDescription;
     }
 
+    /**
+     * Get brand id of a car.
+     *
+     * @return brand Id.
+     */
+    public Integer getBrId() {
+        return brId;
+    }
+
+    /**
+     * Set brand Id.
+     *
+     * @param brId brand Id.
+     */
+    public void setBrId(final Integer brId) {
+        this.brId = brId;
+    }
+
     @Override
     public String toString() {
         return "Car{"
@@ -136,6 +161,7 @@ public class Car {
                 + ", carName='" + carName + '\''
                 + ", carDateOfSale=" + carDateOfSale
                 + ", carDescription='" + carDescription + '\''
+                + ", brId=" + brId
                 + '}';
     }
 }
