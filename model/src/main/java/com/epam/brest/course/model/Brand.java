@@ -48,13 +48,10 @@ public class Brand {
      * Constructor with parameters for Brand.
      *
      * @param brandName name of Brand.
-     * @param brandSold number of sold cars of this Brand.
      * @param brandDescription description od Brand.
      */
-    public Brand(final String brandName, final Integer brandSold,
-                 final String brandDescription) {
+    public Brand(final String brandName, final String brandDescription) {
         this.brandName = brandName;
-        this.brandSold = brandSold;
         this.brandDescription = brandDescription;
     }
 
