@@ -30,6 +30,7 @@
         <h2.version>1.4.196</h2.version>
         <spring.version>4.3.14.RELEASE</spring.version>
         <log4j2.version>2.10.0</log4j2.version>
+        <easymock.version>3.5.1</easymock.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
         <junit.version>4.12</junit.version>
     </properties>
@@ -110,6 +111,12 @@
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.easymock</groupId>
+                <artifactId>easymock</artifactId>
+                <version>${easymock.version}</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
