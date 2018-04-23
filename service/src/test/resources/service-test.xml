@@ -16,6 +16,14 @@
         <constructor-arg ref="brandDao"/>
     </bean>
 
+    <bean id="carDao" class="com.epam.brest.course.dao.CarDaoImpl">
+        <constructor-arg ref="namedParameterJdbcTemplate"/>
+    </bean>
+
+    <bean id="carService" class="com.epam.brest.course.service.CarServiceImpl">
+        <constructor-arg ref="carDao"/>
+    </bean>
+
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>

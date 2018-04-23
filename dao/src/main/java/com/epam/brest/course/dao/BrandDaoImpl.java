@@ -149,6 +149,7 @@ public class BrandDaoImpl implements BrandDao {
                     insert, namedParameters, generatedKeyHolder);
             brand.setBrandId(generatedKeyHolder.getKey().intValue());
         } else {
+            LOGGER.error("Brand with the same name already exists");
             throw new IllegalArgumentException(
                     "Brand with the same name already exists");
         }
