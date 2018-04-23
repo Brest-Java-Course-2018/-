@@ -23,7 +23,11 @@ public class CarServiceImpl implements CarService {
      */
     private CarDao carDao;
 
-
+    /**
+     * Constructor.
+     *
+     * @param carDao new carDao.
+     */
     public CarServiceImpl(final CarDao carDao) {
         this.carDao = carDao;
     }
@@ -37,7 +41,7 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public Car getCarById(Integer carId) {
+    public Car getCarById(final Integer carId) {
         LOGGER.debug("getCarById({})", carId);
         Car car = carDao.getCarById(carId);
         LOGGER.debug("getCarById({})", car);
@@ -45,7 +49,7 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public Car addCar(Car car) throws NullPointerException {
+    public Car addCar(final Car car) throws NullPointerException {
         LOGGER.debug("addCar({})", car);
         Car newCar = carDao.addCar(car);
         LOGGER.debug("addCar({})", newCar);
@@ -53,13 +57,13 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public void updateCar(Car car) {
+    public void updateCar(final Car car) {
         LOGGER.debug("updateCar({})", car);
         carDao.updateCar(car);
     }
 
     @Override
-    public void deleteCarById(Integer carId) {
+    public void deleteCarById(final Integer carId) {
         LOGGER.debug("deleteCarById({})", carId);
         carDao.deleteCarById(carId);
     }

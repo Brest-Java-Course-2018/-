@@ -24,6 +24,11 @@ public class BrandServiceImpl implements BrandService {
      */
     private BrandDao brandDao;
 
+    /**
+     * Constructor.
+     *
+     * @param brandDao new brandDao.
+     */
     public BrandServiceImpl(final BrandDao brandDao) {
         this.brandDao = brandDao;
     }
