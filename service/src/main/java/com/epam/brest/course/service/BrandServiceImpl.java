@@ -12,7 +12,7 @@ import java.util.Collection;
 /**
  * Brand service.
  */
-public class BrandServiceImpl implements BrandService{
+public class BrandServiceImpl implements BrandService {
 
     /**
      * Constant variable for logs.
@@ -30,30 +30,46 @@ public class BrandServiceImpl implements BrandService{
 
     @Override
     public Collection<BrandShortDTO> getBrandShortDTO() {
-        return null;
+        LOGGER.debug("getBrandShortDTO()");
+        Collection<BrandShortDTO> brandShortDTOS = brandDao.getBrandShortDTO();
+        LOGGER.debug("getBrandShortDTO({})", brandShortDTOS);
+        return brandShortDTOS;
     }
 
     @Override
     public Collection<BrandDTO> getBrandDTOs() {
-        return null;
+        LOGGER.debug("getBrandDTOs()");
+        Collection<BrandDTO> brandDTOS = brandDao.getBrandDTOs();
+        LOGGER.debug("getBrandDTOs({})", brandDTOS);
+        return brandDTOS;
     }
 
     @Override
     public Brand getBrandById(final Integer brandId) {
-        return null;
+        LOGGER.debug("getBrandById({})", brandId);
+        Brand newBrand = brandDao.getBrandById(brandId);
+        LOGGER.debug("getBrandById(new brand : {})", newBrand);
+        return newBrand;
     }
 
     @Override
     public Brand addBrand(final Brand brand)
             throws IllegalArgumentException {
-        return null;
+        LOGGER.debug("addBrand({})", brand);
+        Brand newBrand = brandDao.addBrand(brand);
+        LOGGER.debug("addBrand(new Brand: {})", newBrand);
+        return newBrand;
     }
 
     @Override
     public void updateBrand(final Brand brand) {
+        LOGGER.debug("updateBrand({})", brand);
+        brandDao.updateBrand(brand);
     }
 
     @Override
     public void deleteBrand(final Integer brandId) {
+        LOGGER.debug("deleteBrand({})", brandId);
+        brandDao.deleteBrand(brandId);
     }
 }
