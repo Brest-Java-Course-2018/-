@@ -1,4 +1,4 @@
-package com.epam.brest.course.dao;
+package com.epam.brest.course.service;
 
 import com.epam.brest.course.model.Brand;
 import com.epam.brest.course.model.DTO.BrandDTO;
@@ -17,13 +17,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 
+import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:test-db-spring.xml",
-        "classpath:test-dao.xml", "classpath:dao.xml"})
+        "classpath:service-test.xml", "classpath:dao.xml"})
 @Rollback
 @Transactional
-public class BrandDaoImplTest {
+public class BrandServiceImplTest {
 
     private static final Logger LOGGER = LogManager.getLogger();
     private static final String BRAND_NAME_1 = "BMW";
@@ -32,26 +33,26 @@ public class BrandDaoImplTest {
     private static final String NEW_BRAND_DESCR = "AMG C 63 models";
 
     @Autowired
-    BrandDao brandDao;
+    private BrandService brandService;
 
     @Test
     public void getBrandShortDTO() {
         LOGGER.debug("getBrandShortDTO()");
-        brandDao.addBrand(new Brand("qwerty", "uiop"));
-        Assert.assertTrue(brandDao.getBrandShortDTO().size() > 0);
+        brandService.addBrand(new Brand("qwerty", "uiop"));
+        Assert.assertTrue(brandService.getBrandShortDTO().size() > 0);
     }
 
     @Test
     public void getBrandDTOs() {
         LOGGER.debug("getBrandDTOs()");
-        brandDao.addBrand(new Brand("qwerty", "uiop"));
-        Assert.assertTrue(brandDao.getBrandDTOs().size() > 0);
+        brandService.addBrand(new Brand("qwerty", "uiop"));
+        Assert.assertTrue(brandService.getBrandDTOs().size() > 0);
     }
 
     @Test
     public void getBrandById() {
         LOGGER.debug("getBrandById()");
-        Brand brand = brandDao.getBrandById(1);
+        Brand brand = brandService.getBrandById(1);
         Assert.assertTrue(brand.getBrandName().equals(BRAND_NAME_1));
         Assert.assertTrue(brand.getBrandDescription().equals(BRAND_DESCR_1));
     }
@@ -59,10 +60,10 @@ public class BrandDaoImplTest {
     @Test
     public void addBrandTest1() {
         LOGGER.debug("addBrandTest1()");
-        Collection<BrandDTO> brands = brandDao.getBrandDTOs();
+        Collection<BrandDTO> brands = brandService.getBrandDTOs();
         int sizeBefore = brands.size();
         Brand brand = new Brand("Audi", "4 companies");
-        Brand newBrand = brandDao.addBrand(brand);
+        Brand newBrand = brandService.addBrand(brand);
 
         Assert.assertNotNull(newBrand);
         Assert.assertTrue(newBrand.getBrandName().equals(
@@ -71,15 +72,15 @@ public class BrandDaoImplTest {
         Assert.assertTrue(newBrand.getBrandDescription().equals(
                 brand.getBrandDescription()));
         Assert.assertTrue(
-                sizeBefore + 1 == brandDao.getBrandDTOs().size());
+                sizeBefore + 1 == brandService.getBrandDTOs().size());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void addBrandTest2() {
         LOGGER.debug("addBrandTest2()");
         Brand brand = new Brand("Audi", "4 companies");
-        brandDao.addBrand(brand);
-        brandDao.addBrand(brand);
+        brandService.addBrand(brand);
+        brandService.addBrand(brand);
     }
 
     @Test
@@ -87,11 +88,11 @@ public class BrandDaoImplTest {
         LOGGER.debug("updateBrand()");
 
         Brand brand = new Brand("Audi", "4 companies");
-        Brand newBrand = brandDao.addBrand(brand);
+        Brand newBrand = brandService.addBrand(brand);
         newBrand.setBrandName(NEW_BRAND_NAME);
         newBrand.setBrandDescription(NEW_BRAND_DESCR);
-        brandDao.updateBrand(newBrand);
-        Brand updateBrand = brandDao.getBrandById(newBrand.getBrandId());
+        brandService.updateBrand(newBrand);
+        Brand updateBrand = brandService.getBrandById(newBrand.getBrandId());
 
         Assert.assertTrue(newBrand.getBrandId() ==
                 updateBrand.getBrandId());
@@ -105,26 +106,26 @@ public class BrandDaoImplTest {
     public void deleteBrandTest1() {
         LOGGER.debug("deleteBrandTest1()");
         Brand brand = new Brand("Audi", "4 companies");
-        brand = brandDao.addBrand(brand);
-        Collection<BrandDTO> brandDTOS = brandDao.getBrandDTOs();
+        brand = brandService.addBrand(brand);
+        Collection<BrandDTO> brandDTOS = brandService.getBrandDTOs();
         int sizeBefore = brandDTOS.size();
-        brandDao.deleteBrand(brand.getBrandId());
+        brandService.deleteBrand(brand.getBrandId());
 
-        Assert.assertTrue(sizeBefore - 1 == brandDao.getBrandDTOs().size());
+        Assert.assertTrue(sizeBefore - 1 == brandService.getBrandDTOs().size());
     }
 
     @Test(expected = DataIntegrityViolationException.class)
     public void deleteBrandTest2() {
         LOGGER.debug("deleteBrandTest2()");
-        brandDao.deleteBrand(1);
+        brandService.deleteBrand(1);
     }
 
     @Test(expected = EmptyResultDataAccessException.class)
     public void deleteBrandTest3() {
         LOGGER.debug("deleteBrandTest3()");
         Brand brand = new Brand("Audi", "4 companies");
-        brandDao.addBrand(brand);
-        brandDao.deleteBrand(brand.getBrandId());
-        brandDao.deleteBrand(brand.getBrandId());
+        brandService.addBrand(brand);
+        brandService.deleteBrand(brand.getBrandId());
+        brandService.deleteBrand(brand.getBrandId());
     }
 }
