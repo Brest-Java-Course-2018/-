@@ -30,26 +30,37 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Collection<CarDTO> getCars() {
-        return null;
+        LOGGER.debug("getCars()");
+        Collection<CarDTO> carDTOS = carDao.getCars();
+        LOGGER.debug("getCars({})", carDTOS);
+        return carDTOS;
     }
 
     @Override
     public Car getCarById(Integer carId) {
-        return null;
+        LOGGER.debug("getCarById({})", carId);
+        Car car = carDao.getCarById(carId);
+        LOGGER.debug("getCarById({})", car);
+        return car;
     }
 
     @Override
     public Car addCar(Car car) throws NullPointerException {
-        return null;
+        LOGGER.debug("addCar({})", car);
+        Car newCar = carDao.addCar(car);
+        LOGGER.debug("addCar({})", newCar);
+        return newCar;
     }
 
     @Override
     public void updateCar(Car car) {
-
+        LOGGER.debug("updateCar({})", car);
+        carDao.updateCar(car);
     }
 
     @Override
     public void deleteCarById(Integer carId) {
-
+        LOGGER.debug("deleteCarById({})", carId);
+        carDao.deleteCarById(carId);
     }
 }
